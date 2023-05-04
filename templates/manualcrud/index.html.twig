@@ -1,0 +1,54 @@
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block title %}CRUD manuel{% endblock %}#}
+
+{#{% block body %}#}
+{#    <div>#}
+{#        <h1>Liste des Quacks</h1>#}
+{#    </div>#}
+{#    {% for quack in quacks %}#}
+{#        <div>#}
+{#            <p>{{ quack.id }}</p>#}
+{#            <p>{{ quack.content }}</p>#}
+{#            <p> </p>#}
+{#        </div>#}
+{#    {% endfor %}#}
+{#{% endblock %}#}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Quack index{% endblock %}
+
+{% block body %}
+    <h1>Quack index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Content</th>
+            <th>Created_at</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for quack in quacks %}
+            <tr>
+                <td>{{ quack.id }}</td>
+                <td>{{ quack.content }}</td>
+                <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_manualcrud_show', {'id': quack.id}) }}">show</a>
+                    <a href="{{ path('app_manualcrud_edit', {'id': quack.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_manualcrud_new') }}">Create new</a>
+{% endblock %}

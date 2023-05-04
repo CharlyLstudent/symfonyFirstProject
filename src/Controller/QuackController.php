@@ -34,7 +34,7 @@ class QuackController extends AbstractController
             return $this->redirectToRoute('app_quack_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('quack/new.html.twig', [
+        return $this->render('quack/new.html.twig', [
             'quack' => $quack,
             'form' => $form,
         ]);
@@ -60,7 +60,7 @@ class QuackController extends AbstractController
             return $this->redirectToRoute('app_quack_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('quack/edit.html.twig', [
+        return $this->render('quack/edit.html.twig', [
             'quack' => $quack,
             'form' => $form,
         ]);

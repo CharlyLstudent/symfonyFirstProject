@@ -3,11 +3,21 @@
 {% block title %}Edit Quack{% endblock %}
 
 {% block body %}
-    <h1>Edit Quack</h1>
+    <div class="flex justify-center items-center h-screen">
+        <div class="bg-white p-4 rounded-lg shadow-lg w-1/4">
+            <h1 class="text-center text-2xl font-bold">Edit Quack</h1>
 
-    {{ include('quack/_form.html.twig', {'button_label': 'Update'}) }}
+            <div class="my-4 shadow-md">
+                {{ include('quack/_form.html.twig', {'button_label': 'Update'}) }}
+            </div>
 
-    <a href="{{ path('app_quack_index') }}">back to list</a>
+            <div class="mt-4 text-center shadow-md">
+                <a href="{{ path('app_quack_index') }}" class="block mb-2 font-bold">Back to List</a>
+            </div>
 
-    {{ include('quack/_delete_form.html.twig') }}
+            <div class="my-4 shadow-md">
+                {{ include('quack/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

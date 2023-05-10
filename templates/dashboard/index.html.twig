@@ -3,26 +3,43 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block body %}
+    <div class="flex flex-col items-center justify-center h-screen">
+        <div class="max-w-lg bg-white p-8 rounded-lg shadow-lg">
+            <h1 class="text-3xl text-center mb-8">Bienvenue sur votre dashboard {{ duck.prenom }}</h1>
+            <h2 class="text-lg text-center mb-8">Vous pouvez modifier vos informations personnelles ici</h2>
 
-    <div class="example-wrapper">
-        <h1>Bienvenue sur votre Dashboard</h1>
-        <p>Vous pouvez modifier vos informations personnelles ici</p>
-    </div>
-    <div>
-        {{ dump(duck) }}
-        <p>Bienvenu sur votre dashboard {{ duck.prenom }}</p>
-        <h1>Mon compte</h1>
-        {{ form_start(form) }}
-        {{ form_row(form.prenom) }}
-        {{ form_row(form.nom) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.password) }}
-        {{ form_end(form) }}
-    </div>
-    <div>
-        <a href="{{ path('app_quack_index') }}">Retourner sur Quacknet</a>
-        <a href="{{ path('app_logout') }}">Logout</a>
+            {{ form_start(form) }}
+            <div class="my-4">
+                {{ form_label(form.prenom, 'Prénom') }}
+                {{ form_widget(form.prenom, { 'attr': {'class': 'border w-full p-2'} }) }}
+            </div>
+            <div class="my-4">
+                {{ form_label(form.nom, 'Nom') }}
+                {{ form_widget(form.nom, { 'attr': {'class': 'border w-full p-2'} }) }}
+            </div>
+            <div class="my-4">
+                {{ form_label(form.email, 'Email') }}
+                {{ form_widget(form.email, { 'attr': {'class': 'border w-full p-2'} }) }}
+            </div>
+            <div class="my-4">
+                {{ form_label(form.password, 'Mot de passe') }}
+                {{ form_widget(form.password, { 'attr': {'class': 'border w-full p-2'} }) }}
+            </div>
+            <div class="my-4">
+                {{ form_label(form.username, 'Nom utilisateur : ') }}
+                {{ form_widget(form.username, { 'attr': {'class': 'border w-full'} }) }}
+            </div>
+            <div class="flex justify-center">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                    Modifier
+                </button>
+            </div>
+            {{ form_end(form) }}
+
+            <div class="mt-8 text-center">
+                <a href="{{ path('app_quack_index') }}" class="block mb-2 text-blue-500 hover:text-blue-600 font-bold">Retourner sur Quacknet</a>
+                <a href="{{ path('app_logout') }}" class="block text-red-500 hover:text-red-600 font-bold">Logout</a>
+            </div>
+        </div>
     </div>
 {% endblock %}
-
-

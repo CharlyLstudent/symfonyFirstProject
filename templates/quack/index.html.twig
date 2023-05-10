@@ -3,37 +3,57 @@
 {% block title %}Quack index{% endblock %}
 
 {% block body %}
-    <h1>Quack index</h1>
-    <a href="{{ path('app_register') }}">Register</a>
-    <a href="{{ path('app_login') }}">Login</a>
-    <a href="{{ path('dashboard') }}">Dashboard</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>Created_at</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for quack in quacks %}
-            <tr>
-                <td>{{ quack.id }}</td>
-                <td>{{ quack.content }}</td>
-                <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_quack_show', {'id': quack.id}) }}">show</a>
-                    <a href="{{ path('app_quack_edit', {'id': quack.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_quack_new') }}">Create new</a>
+    <div class="flex bg-gray-900 text-white">
+        <div class="flex-auto px-4 py-2">
+            <h1 class="font-bold">Quacknet</h1>
+        </div>
+        <div class="flex">
+            <div class="mx-3">
+                <a href="{{ path('app_register') }}" class="text-white hover:text-gray-300">Register</a>
+            </div>
+            <div class="mx-3">
+                <a href="{{ path('app_login') }}" class="text-white hover:text-gray-300">Login</a>
+            </div>
+            <div class="mx-3">
+                <a href="{{ path('dashboard') }}" class="text-white hover:text-gray-300">Dashboard</a>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-center p-5">
+        <h1 class="font-bold text-white">Les derniers Quack de la journée</h1>
+    </div>
+    <div class="flex justify-center text-white">
+        <div>
+            {% for quack in quacks %}
+                <div class="my-4">
+                    <div class="border-4 bg-white text-black p-4 rounded-md shadow-md">
+                        <div>
+                            <div>{{ quack.content }}</div>
+                            <div class="text-xs font-bold text-right py-2">{{ quack.createdAt ? quack.createdAt|date('Y-m-d H:i:s') : '' }}</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-around">
+                        {% if app.user is defined and app.user == quack.user %}
+                            <a href="{{ path('app_quack_edit', { 'id': quack.id }) }}"  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-4 rounded">Editer</a>
+                            <form action="{{ path('app_quack_delete', { 'id': quack.id }) }}" method="post">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ quack.id) }}">
+                                <button type="submit"  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-4 rounded">Supprimer</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="my-4">
+                    <div class="bg-white text-black p-4 rounded-md shadow-md">
+                        <div>no records found</div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="flex justify-center mt-4">
+                <button class="bg-pink-400 hover:bg-pink-500 text-white font-bold py-2 px-4 rounded-lg shadow-md">
+                    <a href="{{ path('app_quack_new') }}" class="block">Create new</a>
+                </button>
+            </div>
+        </div>
+    </div>
 {% endblock %}

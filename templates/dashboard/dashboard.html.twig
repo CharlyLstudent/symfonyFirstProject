@@ -3,18 +3,19 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block body %}
-
-    <div class="example-wrapper">
-        <h1>Bienvenue sur votre Dashboard</h1>
-        <p>Vous pouvez modifier vos informations personnelles ici</p>
-    </div>
     <div>
-        <a href="{{ path('dashboard_edit') }}">Editer mon profil</a>
+        <div class="text-white flex justify-center">
+            <h1>Bienvenue sur votre Dashboard</h1>
+        </div>
+        <div class="text-white flex justify-center">
+            <p>Vous pouvez modifier vos informations personnelles ici</p>
+        </div>
     </div>
-    <div>
-        <a href="{{ path('app_quack_index') }}">Retourner sur Quacknet</a>
-        <a href="{{ path('app_logout') }}">Logout</a>
+        <div class="p-5 flex justify-center flex-col">
+            <a href="{{ path('dashboard_edit') }}" class="text-sky-400 font-bold">Editer mon profil</a>
+        </div>
+    <div class=" flex justify-center flex-col">
+        <a href="{{ path('app_quack_index') }}" class="text-white font-bold">Retourner sur Quacknet | </a>
+        <a href="{{ path('app_logout') }}" class="text-white font-bold">Logout</a>
     </div>
 {% endblock %}
-
-

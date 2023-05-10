@@ -3,28 +3,33 @@
 {% block title %}Quack{% endblock %}
 
 {% block body %}
-    <h1>Quack</h1>
+    <div class="p-8 flex flex-col items-center">
+        <h1 class="text-3xl font-bold mb-6 text-white">Quack</h1>
 
-    <table class="table">
-        <tbody>
+        <table class="table bg-white rounded-lg shadow-lg">
+            <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ quack.id }}</td>
+                <th class="px-4 py-2">Id</th>
+                <td class="px-4 py-2">{{ quack.id }}</td>
             </tr>
             <tr>
-                <th>Content</th>
-                <td>{{ quack.content }}</td>
+                <th class="px-4 py-2">Content</th>
+                <td class="px-4 py-2">{{ quack.content }}</td>
             </tr>
             <tr>
-                <th>Created_at</th>
-                <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <th class="px-4 py-2">Created_at</th>
+                <td class="px-4 py-2">{{ quack.createdAt ? quack.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_manualcrud') }}">back to list</a>
+        <div class="mt-4">
+            <a href="{{ path('app_manualcrud') }}" class="text-blue-500 hover:underline font-bold">back to list</a>
+            <a href="{{ path('app_quack_edit', {'id': quack.id}) }}" class="ml-4 text-blue-500 hover:underline font-bold">edit</a>
+        </div>
 
-    <a href="{{ path('app_quack_edit', {'id': quack.id}) }}">edit</a>
-
-    {{ include('quack/_delete_form.html.twig') }}
+        <div class="mt-4">
+            {{ include('quack/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

@@ -3,5 +3,12 @@
 @tailwind utilities;
 
 body {
-    background-color: lightgray;
+    background-color: #0f172a;
+}
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
 }

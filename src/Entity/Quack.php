@@ -20,6 +20,10 @@ class Quack
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
 
+    #[ORM\ManyToOne(inversedBy: 'quacks')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Ducks $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +49,18 @@ class Quack
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUser(): ?Ducks
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Ducks $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

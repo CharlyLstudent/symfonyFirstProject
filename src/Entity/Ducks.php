@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DucksRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -37,6 +39,14 @@ class Ducks implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Quack::class, orphanRemoval: true)]
+    private Collection $quacks;
+
+    public function __construct()
+    {
+        $this->quacks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -140,6 +150,36 @@ class Ducks implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Quack>
+     */
+    public function getQuacks(): Collection
+    {
+        return $this->quacks;
+    }
+
+    public function addQuack(Quack $quack): self
+    {
+        if (!$this->quacks->contains($quack)) {
+            $this->quacks->add($quack);
+            $quack->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuack(Quack $quack): self
+    {
+        if ($this->quacks->removeElement($quack)) {
+            // set the owning side to null (unless already changed)
+            if ($quack->getUser() === $this) {
+                $quack->setUser(null);
+            }
+        }
 
         return $this;
     }

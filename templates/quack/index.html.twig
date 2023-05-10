@@ -37,7 +37,7 @@
                             <a href="{{ path('app_quack_edit', { 'id': quack.id }) }}"  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-4 rounded">Editer</a>
                             <form action="{{ path('app_quack_delete', { 'id': quack.id }) }}" method="post">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ quack.id) }}">
-                                <button type="submit"  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-4 rounded">Supprimer</button>
+                                <button type="submit"  class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-4 rounded">Supprimer</button>
                             </form>
                         {% endif %}
                     </div>
